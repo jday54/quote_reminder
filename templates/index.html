@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Random URL</title>
+</head>
+<body>
+    <h1>Open a Random URL</h1>
+    <button onclick="openRandomUrl()">Open Random URL</button>
+    <p id="message"></p>
+    <script>
+        function openRandomUrl() {
+            fetch('/open-random-url')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('message').innerText = data.message + ": " + data.url;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
