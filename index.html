@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Open Random URL</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Open a Random URL</h1>
+    <button onclick="openRandomUrl()">Open Random URL</button>
+    <p id="message"></p>
+
+    <script>
+        async function fetchUrls() {
+            const response = await fetch('urls.json');
+            const data = await response.json();
+            return parseUrls(data);
+        }
+
+        function parseUrls(data) {
+            let urls = [];
+            let startIndex = 0;
+            let endIndex = 0;
+            const desiredCollectionName = "Quotes";
+            for (let i = 0; i < data.saved_saved_collections.length; i++) {
+                const entry = data.saved_saved_collections[i];
+                if (entry.title && entry.string_map_data.Name.value === desiredCollectionName) {
+                    startIndex = i + 1;
+                    endIndex = startIndex + 0;
+                    continue;
+                }
+                if (startIndex !== 0) {
+                    if (entry.title) {
+                        break;
+                    } else {
+                        endIndex += 1;
+                    }
+                }
+            }
+            const relevantEntries = data.saved_saved_collections.slice(startIndex, endIndex);
+            relevantEntries.forEach(entry => {
+                urls.push(entry.string_map_data.Name.href);
+            });
+            return urls;
+        }
+
+        async function openRandomUrl() {
+            const urls = await fetchUrls();
+            const randomUrl = urls[Math.floor(Math.random() * urls.length)];
+            window.open(randomUrl, '_blank');
+            document.getElementById('message').innerText = `URL opened: ${randomUrl}`;
+        }
+    </script>
+</body>
+</html>
