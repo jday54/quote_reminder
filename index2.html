@@ -108,7 +108,7 @@
         async function openRandomUrl() {
             const urls = await fetchUrls();
             const randomUrl = urls[Math.floor(Math.random() * urls.length)];
-            window.open(randomUrl, '_blank');
+            window.location.href = randomUrl;
             document.getElementById('message').innerText = `URL opened: ${randomUrl}`;
         }
     </script>
