@@ -1,0 +1,1 @@
+this is the first version of the app that was using Flask (but not using it anymore bc i just want a static site)
