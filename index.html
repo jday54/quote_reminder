@@ -56,6 +56,10 @@
             text-align: center;
             padding: 10px 0;
         }
+        img.logo {
+            max-width: 200px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -63,12 +67,13 @@
         <h1>Welcome to Random Saved URL Opener</h1>
     </header>
     <div class="container">
+        <img src="logo.png" alt="Logo" class="logo">
         <h1>Open a Random Saved URL</h1>
         <button onclick="openRandomUrl()">Open Random Saved URL</button>
         <p id="message"></p>
     </div>
     <footer>
-        <p>&copy; 2024 Random URL Opener. All rights reserved.</p>
+        <p> Made by John Day. On github: <a href="url">https://github.com/jday54</a> </p>
     </footer>
 
     <script>
